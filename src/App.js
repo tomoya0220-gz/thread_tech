@@ -1,6 +1,9 @@
 import logo from './logo.svg';
 import './App.css';
 import { useEffect, useState } from 'react';
+import { BrowserRouter, Link, Routes, Route } from 'react-router-dom';
+import { Header } from './components/Header';
+import { NewThread } from './components/NewThread';
 
 export const App = () => {
   const [lists, setLists] = useState([]);
@@ -20,21 +23,39 @@ export const App = () => {
     fetchList();
     }, []);
 
+  const newThread = () => {
+
+  }
+
   return (
-    <div>
-      <header>掲示板</header>
-      <div>
-        <p>新着スレッド</p>
-      </div>
-      <ul>
-        {lists.map((list) => (
-          <li key={list.id}>
+    <>
+      <BrowserRouter>
+        <div className="">
+          <Link to="/">掲示板</Link>
+          <br />
+          <Link to="/thread/new">新規スレッド作成</Link>
+        </div>
+        <Routes>
+          <Route exact path="/">
+            <Header />
             <div>
-              <p>{list.title}</p>
+              <p>新着スレッド</p>
+              <ul>
+                {lists.map((list) => (
+                  <li key={list.id}>
+                    <div>
+                      <p>{list.title}</p>
+                    </div>
+                  </li>
+                ))}
+              </ul>
             </div>
-          </li>
-        ))}
-      </ul>
-    </div>
+          </Route>
+          <Route path="/thread/new">
+            <NewThread />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </>
   );
-}
+};
