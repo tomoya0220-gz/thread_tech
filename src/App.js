@@ -23,20 +23,14 @@ export const App = () => {
     fetchList();
     }, []);
 
-  const newThread = () => {
-
-  }
-
   return (
-    <>
-      <BrowserRouter>
-        <div className="">
-          <Link to="/">掲示板</Link>
-          <br />
-          <Link to="/thread/new">新規スレッド作成</Link>
-        </div>
-        <Routes>
-          <Route exact path="/">
+    <BrowserRouter>
+      <Link to="/">掲示板</Link>
+      <br />
+      <Link to="/thread/new">新規スレッド作成</Link>
+      <Routes>
+        <Route exact path="/" element={
+          <>
             <Header />
             <div>
               <p>新着スレッド</p>
@@ -50,12 +44,10 @@ export const App = () => {
                 ))}
               </ul>
             </div>
-          </Route>
-          <Route path="/thread/new">
-            <NewThread />
-          </Route>
-        </Routes>
-      </BrowserRouter>
-    </>
+          </>
+        } />
+        <Route path="/thread/new" element={<NewThread />} />
+      </Routes>
+    </BrowserRouter>
   );
 };
