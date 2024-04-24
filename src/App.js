@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { BrowserRouter, Link, Routes, Route } from 'react-router-dom';
 import { Header } from './components/Header';
 import { NewThread } from './components/NewThread';
+import { Message } from './components/Message';
 
 export const App = () => {
   const [lists, setLists] = useState([]);
@@ -27,7 +28,7 @@ export const App = () => {
     <BrowserRouter>
       <Link to="/">掲示板</Link>
       <br />
-      <Link to="/thread/new">新規スレッド作成</Link>
+      <Link to="/threads/new">新規スレッド作成</Link>
       <Routes>
         <Route exact path="/" element={
           <>
@@ -46,7 +47,8 @@ export const App = () => {
             </div>
           </>
         } />
-        <Route path="/thread/new" element={<NewThread />} />
+        <Route path="/threads/new" element={<NewThread />} />
+        <Route path="/thread/:threadId" element={< Message />} />
       </Routes>
     </BrowserRouter>
   );

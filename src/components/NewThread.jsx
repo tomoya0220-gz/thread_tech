@@ -1,7 +1,8 @@
 import { useState } from "react";
 
 export const NewThread = () => {
-  const [text, setText] = useState('');
+  const [threads, setThreads] = useState([]);
+  const [userText, setText] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (event) => {
@@ -14,15 +15,18 @@ export const NewThread = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ text })
+        body: JSON.stringify({ title: userText })
       });
 
-      if (!response.ok) {
-        throw new Error(`エラー`)
+      if (response.ok) {
+        const data = await response.json();
+        setThreads(prevThreads => [...prevThreads, data]);
+        alert('新しいスレッドが作成されました')
+        setText('');
+      } else {
+        const errorData = await response.json();
+        alert(`エラーが発生しました： ${errorData.message || response.status}`);
       }
-
-      alert('新しいスレッドが作成されました')
-      setText('');
     } catch(error) {
       alert(error.message);
     } finally {
@@ -32,13 +36,12 @@ export const NewThread = () => {
 
   return (
     <>
-      <h1>新規スレッド作成</h1>
       <form onSubmit={handleSubmit}>
         <label>
-          Text:
+          Title:
           <textarea 
             type="text"
-            value={text}
+            value={userText}
             onChange={e => setText(e.target.value)}
           />
         </label>
