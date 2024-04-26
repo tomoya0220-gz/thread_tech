@@ -2,7 +2,6 @@ import logo from './logo.svg';
 import './App.css';
 import { useEffect, useState } from 'react';
 import { BrowserRouter, Link, Routes, Route } from 'react-router-dom';
-import { Header } from './components/Header';
 import { NewThread } from './components/NewThread';
 import { Message } from './components/Message';
 
@@ -32,7 +31,6 @@ export const App = () => {
       <Routes>
         <Route exact path="/" element={
           <>
-            <Header />
             <div>
               <p>新着スレッド</p>
               <ul>

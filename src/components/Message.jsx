@@ -52,19 +52,17 @@ export const Message = () => {
         {userMessages.map((userMessage) => (
           <li key={userMessage.id}>
             <div>
-              <p>{userMessage.text}</p>
+              <p>{userMessage.post}</p>
             </div>
           </li>
         ))}
       </ul>
       <p>コメント</p>
-      <p>
         <input
           value={userPost}
           onChange={e => setPost(e.target.value)}
         />
         <button type="submit" onClick={handleSubmit} disabled={isSubmitting}>投稿</button>
-      </p>
     </>
   );
 };
