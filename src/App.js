@@ -25,17 +25,18 @@ export const App = () => {
 
   return (
     <BrowserRouter>
-      <Link to="/">掲示板</Link>
-      <br />
-      <Link to="/threads/new">新規スレッド作成</Link>
+      <div className="header">
+        <Link to="/">掲示板</Link>
+        <Link to="/threads/new">新規スレッド作成</Link>
+      </div>
       <Routes>
         <Route exact path="/" element={
           <>
-            <div>
-              <p>新着スレッド</p>
-              <ul>
+            <div className="thread-list-container">
+              <p className="thread-list-title">新着スレッド</p>
+              <ul className="thread-list">
                 {lists.map((list) => (
-                  <li key={list.id}>
+                  <li key={list.id} className="thread-item">
                     <div>
                       <p>{list.title}</p>
                     </div>
